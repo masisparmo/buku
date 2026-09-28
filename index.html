@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Buku Karya Isparmo | Koleksi Buku dan Ebook</title>
+  <meta name="description" content="Koleksi buku dan ebook karya Isparmo tentang AI, teknologi, produktivitas, spiritualitas, refleksi kehidupan, dan pengembangan diri." />
+  
+  <!-- Canonical & Social Metadata -->
+  <link rel="canonical" href="https://buku.isparmo.com/" />
+  <meta property="og:site_name" content="Buku Isparmo" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://buku.isparmo.com/" />
+  <meta property="og:title" content="Buku Karya Isparmo | Koleksi Buku dan Ebook" />
+  <meta property="og:description" content="Koleksi buku dan ebook karya Isparmo tentang AI, teknologi, produktivitas, spiritualitas, refleksi kehidupan, dan pengembangan diri." />
+  <meta property="og:image" content="images/covers/guru-cyborg.webp" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Buku Karya Isparmo | Koleksi Buku dan Ebook" />
+  <meta name="twitter:description" content="Koleksi buku dan ebook karya Isparmo tentang AI, teknologi, produktivitas, spiritualitas, refleksi kehidupan, dan pengembangan diri." />
+  <meta name="twitter:image" content="images/covers/guru-cyborg.webp" />
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- Sticky Minimalist Header -->
+  <header class="site-header" role="banner">
+    <div class="container header-inner">
+      <a href="index.html" class="brand-logo" aria-label="Buku Isparmo - Beranda">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <span>BUKU ISPARMO</span>
+      </a>
+
+      <!-- Desktop Nav -->
+      <nav class="desktop-nav" aria-label="Navigasi Utama">
+        <ul class="nav-links">
+          <li><a href="#katalog" class="nav-link">Koleksi Buku</a></li>
+          <li><a href="#tentang" class="nav-link">Tentang Penulis</a></li>
+        </ul>
+      </nav>
+
+      <!-- Mobile Nav Toggle -->
+      <button class="mobile-toggle" aria-label="Buka menu navigasi" aria-expanded="false" aria-controls="mobile-drawer">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Mobile Drawer Navigation -->
+    <div id="mobile-drawer" class="mobile-drawer">
+      <ul class="mobile-nav-links">
+        <li><a href="#katalog" class="mobile-nav-link">Koleksi Buku</a></li>
+        <li><a href="#tentang" class="mobile-nav-link">Tentang Penulis</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="main-content" id="main-content">
+    
+    <!-- Hero Section -->
+    <section class="hero-section" aria-labelledby="hero-title">
+      <div class="container hero-grid">
+        <div class="hero-content">
+          <span class="section-label">Personal Publishing Catalog</span>
+          <h1 id="hero-title" class="hero-title">Buku Karya Isparmo</h1>
+          <p class="hero-subtitle">Gagasan, pengetahuan, dan pengalaman yang dirangkum menjadi buku.</p>
+          <p class="hero-desc">Temukan koleksi buku karya Isparmo, mulai dari kecerdasan buatan dan teknologi hingga refleksi kehidupan, kebahagiaan, dan spiritualitas.</p>
+          <div class="hero-actions">
+            <a href="#katalog" class="btn btn-accent btn-lg">Jelajahi Koleksi</a>
+            <a href="#tentang" class="btn btn-outline btn-lg">Tentang Penulis</a>
+          </div>
+        </div>
+
+        <div class="hero-visual" aria-hidden="true">
+          <div class="hero-cover-stack">
+            <div class="hero-stack-card card-1">
+              <img src="images/covers/prompt-engineering.webp" alt="" width="230" height="340" />
+            </div>
+            <div class="hero-stack-card card-2">
+              <img src="images/covers/seni-menemukan-tenang.webp" alt="" width="230" height="340" />
+            </div>
+            <div class="hero-stack-card card-main">
+              <img src="images/covers/guru-cyborg.webp" alt="" width="230" height="340" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Featured Book Section -->
+    <section class="featured-section" aria-labelledby="featured-heading">
+      <div class="container">
+        <span class="section-label">BUKU UNGGULAN</span>
+        <h2 id="featured-heading" class="visually-hidden" style="position: absolute; width: 1px; height: 1px; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0);">Buku Unggulan</h2>
+        <div id="featured-book-container">
+          <!-- Di-render dinamis oleh JavaScript -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Catalog Section -->
+    <section class="catalog-section" id="katalog" aria-labelledby="catalog-heading">
+      <div class="container">
+        <div class="catalog-header">
+          <span class="section-label">Katalog Lengkap</span>
+          <h2 id="catalog-heading" class="section-title">KOLEKSI BUKU</h2>
+          <p class="section-desc">Telusuri seluruh karya yang telah diterbitkan di Google Play Books. Gunakan pencarian dan filter untuk menemukan topik yang Anda minati.</p>
+        </div>
+
+        <!-- Controls: Search, Filter, Sort -->
+        <div class="catalog-controls">
+          <div class="search-and-sort-bar">
+            <!-- Real-time Search Box -->
+            <div class="search-box-wrapper">
+              <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+              </svg>
+              <input type="text" id="search-input" class="search-input" placeholder="Cari buku..." aria-label="Cari buku berdasarkan judul, topik, atau kata kunci" autocomplete="off" />
+              <button type="button" id="clear-search-btn" class="clear-search-btn" aria-label="Hapus kata kunci pencarian">&times;</button>
+            </div>
+
+            <!-- Sorting Dropdown -->
+            <div class="sort-wrapper">
+              <label for="sort-select" class="sort-label">Urutkan:</label>
+              <select id="sort-select" class="sort-select" aria-label="Urutkan koleksi buku">
+                <option value="terbaru">Terbaru</option>
+                <option value="terlama">Terlama</option>
+                <option value="az">A-Z</option>
+                <option value="za">Z-A</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Dynamic Category Filter Pills -->
+          <div class="filter-pills-wrapper" id="category-filters" role="group" aria-label="Filter kategori buku">
+            <!-- Di-generate dari books.js -->
+          </div>
+        </div>
+
+        <!-- Results Info Bar -->
+        <div class="results-info-bar">
+          <span id="results-count" class="results-count">Memuat koleksi buku...</span>
+        </div>
+
+        <!-- Responsive Book Grid -->
+        <div id="books-grid" class="books-grid">
+          <!-- Cards di-render dinamis oleh JavaScript -->
+        </div>
+      </div>
+    </section>
+
+    <!-- About Author Section -->
+    <section class="about-section" id="tentang" aria-labelledby="about-heading">
+      <div class="container">
+        <div class="about-card">
+          <span class="section-label about-tag">Profil</span>
+          <h2 id="about-heading" class="about-title">Tentang Penulis</h2>
+          <p class="about-bio">
+            Isparmo adalah penulis, praktisi, edukator teknologi AI, dan inisiator Komunitas AI untuk Semua (KAIS). Melalui buku-bukunya, ia mencoba menerjemahkan gagasan tentang teknologi, kecerdasan buatan, produktivitas, kehidupan, dan spiritualitas ke dalam bahasa yang sederhana, praktis, dan mudah diterapkan.
+          </p>
+          <div class="about-action">
+            <a href="#katalog" class="btn btn-primary">Lihat Semua Buku</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Global Footer -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <div class="footer-logo">BUKU ISPARMO</div>
+          <p class="footer-tagline">Karya yang ditulis untuk berbagi pengetahuan, pengalaman, dan gagasan.</p>
+        </div>
+        <ul class="footer-nav">
+          <li><a href="index.html" class="footer-link">Beranda</a></li>
+          <li><a href="#katalog" class="footer-link">Koleksi Buku</a></li>
+          <li><a href="#tentang" class="footer-link">Tentang Penulis</a></li>
+        </ul>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2026 Isparmo. All rights reserved.</p>
+        <p>Dipublikasikan secara resmi melalui Google Play Books.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/books.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

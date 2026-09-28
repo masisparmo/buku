@@ -1,0 +1,6 @@
+{
+  "name": "Buku Isparmo - Katalog Buku & Ebook Karya Isparmo",
+  "description": "Koleksi buku dan ebook karya Isparmo tentang AI, teknologi, produktivitas, spiritualitas, refleksi kehidupan, dan pengembangan diri.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

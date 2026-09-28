@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Detail Buku — Isparmo</title>
+  <meta name="description" content="Katalog buku dan ebook karya Isparmo di Google Play Books." />
+  
+  <!-- Canonical & Social Sharing Fallbacks (Updated dynamically by app.js) -->
+  <link rel="canonical" href="https://buku.isparmo.com/book.html" />
+  <meta property="og:site_name" content="Buku Isparmo" />
+  <meta property="og:type" content="book" />
+  <meta property="og:title" content="Detail Buku — Isparmo" />
+  <meta property="og:description" content="Katalog buku dan ebook karya Isparmo di Google Play Books." />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Detail Buku — Isparmo" />
+  <meta name="twitter:description" content="Katalog buku dan ebook karya Isparmo di Google Play Books." />
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- Sticky Minimalist Header -->
+  <header class="site-header" role="banner">
+    <div class="container header-inner">
+      <a href="index.html" class="brand-logo" aria-label="Buku Isparmo - Beranda">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <span>BUKU ISPARMO</span>
+      </a>
+
+      <!-- Desktop Nav -->
+      <nav class="desktop-nav" aria-label="Navigasi Utama">
+        <ul class="nav-links">
+          <li><a href="index.html#katalog" class="nav-link">Koleksi Buku</a></li>
+          <li><a href="index.html#tentang" class="nav-link">Tentang Penulis</a></li>
+        </ul>
+      </nav>
+
+      <!-- Mobile Nav Toggle -->
+      <button class="mobile-toggle" aria-label="Buka menu navigasi" aria-expanded="false" aria-controls="mobile-drawer">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Mobile Drawer Navigation -->
+    <div id="mobile-drawer" class="mobile-drawer">
+      <ul class="mobile-nav-links">
+        <li><a href="index.html#katalog" class="mobile-nav-link">Koleksi Buku</a></li>
+        <li><a href="index.html#tentang" class="mobile-nav-link">Tentang Penulis</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="main-content" id="main-content">
+    <div class="container" id="book-detail-root">
+      <!-- Di-render dinamis oleh app.js berdasarkan query parameter ?id=... -->
+    </div>
+  </main>
+
+  <!-- Global Footer -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <div class="footer-logo">BUKU ISPARMO</div>
+          <p class="footer-tagline">Karya yang ditulis untuk berbagi pengetahuan, pengalaman, dan gagasan.</p>
+        </div>
+        <ul class="footer-nav">
+          <li><a href="index.html" class="footer-link">Beranda</a></li>
+          <li><a href="index.html#katalog" class="footer-link">Koleksi Buku</a></li>
+          <li><a href="index.html#tentang" class="footer-link">Tentang Penulis</a></li>
+        </ul>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2026 Isparmo. All rights reserved.</p>
+        <p>Dipublikasikan secara resmi melalui Google Play Books.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/books.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
