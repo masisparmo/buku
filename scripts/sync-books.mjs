@@ -135,6 +135,12 @@ async function fetchBookDetail(bookId) {
   if (subtitleMatch) {
     cleanTitle = subtitleMatch[1].trim();
     subtitle = subtitleMatch[2].trim();
+  } else {
+    const colonMatch = cleanTitle.match(/^([^:]+):\s*(.+)$/);
+    if (colonMatch) {
+      cleanTitle = colonMatch[1].trim();
+      subtitle = colonMatch[2].trim();
+    }
   }
   
   // Ekstrak Deskripsi / Resume

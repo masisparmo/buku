@@ -8,6 +8,37 @@
 
 const books = [
   {
+    id: "generasi-tanpa-arah",
+    googlePlayId: "7VQUEgAAQBAJ",
+    googlePlayUrl: "https://play.google.com/store/books/details?id=7VQUEgAAQBAJ",
+    lynkUrl: "",
+    title: "Generasi Tanpa Arah",
+    subtitle: "Panduan Keluarga Menghadapi Perubahan Zaman dalam Pernikahan, Agama, dan Pendidikan Karakter Anak",
+    author: "Isparmo",
+    pages: 120,
+    year: 2026,
+    publication: "September 2026",
+    category: "Pengembangan Diri",
+    publisher: "Isparmo",
+    cover: "images/covers/generasi-tanpa-arah.webp",
+    featured: false,
+    priceType: "free",
+    status: "FREE",
+    resume: "Banyak orang tua dan guru hari ini merasa bingung menghadapi anak-anak dan remaja: mudah cemas, kecanduan layar ponsel, malas bergaul, dan seolah kehilangan tujuan hidup. Namun, menyalahkan mereka bukanlah solusi. Buku ini hadir untuk mengajak kita melihat akar masalah yang sebenarnya: perubahan zaman yang serba cepat, tekanan ekonomi keluarga, dan kurangnya rasa aman serta arah dalam tumbuh kembang mereka. Lewat bahasa yang hangat dan mudah dipraktikkan, buku ini memberikan panduan nyata bagi orang tua, guru, calon pengantin, hingga pengurus lingkungan/masjid dalam merangkul generasi muda menuju masa depan penuh harapan.",
+    tags: [
+      "Parenting",
+      "Keluarga",
+      "Pendidikan Karakter",
+      "Generasi Muda",
+      "Pengembangan Diri"
+    ],
+    audience: [
+      "Orang Tua & Pendidik",
+      "Calon Pengantin & Pemuda",
+      "Pengurus Masjid & Komunitas"
+    ]
+  },
+  {
     id: "guru-cyborg",
     googlePlayId: "Bgr4EQAAQBAJ",
     googlePlayUrl: "https://play.google.com/store/books/details?id=Bgr4EQAAQBAJ",
