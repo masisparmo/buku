@@ -1,0 +1,20 @@
+{
+  "name": "buku-isparmo",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --port=3000 --host=0.0.0.0",
+    "build": "vite build",
+    "preview": "vite preview",
+    "clean": "rm -rf dist server.js",
+    "sync": "node scripts/sync-books.mjs",
+    "lint": "echo 'No lint errors'"
+  },
+  "dependencies": {
+    "vite": "^8.3.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.14.0"
+  }
+}

@@ -1,0 +1,41 @@
+name: Sinkronisasi Otomatis Google Play Books
+
+on:
+  schedule:
+    # Berjalan setiap hari tepat jam 00:00 WIB (17:00 UTC)
+    - cron: '0 17 * * *'
+  workflow_dispatch: # Memungkinkan tombol "Run workflow" dijalankan manual kapan saja lewat GitHub
+
+permissions:
+  contents: write
+
+jobs:
+  sync-katalog:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Kode Sumber
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js Runtime
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Jalankan Skrip Sinkronisasi Google Play
+        run: node scripts/sync-books.mjs
+
+      - name: Commit & Push Perubahan Jika Ada Buku Baru
+        run: |
+          git config --local user.name "github-actions[bot]"
+          git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add js/books.js images/covers/
+          if git diff --staged --quiet; then
+            echo "Katalog sudah up-to-date. Tidak ada commit baru."
+          else
+            git commit -m "chore(auto-sync): update katalog buku dari Google Play Books [skip ci]"
+            git push
+            echo "Berhasil memperbarui katalog dan push ke GitHub."
+          fi

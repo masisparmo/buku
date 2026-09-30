@@ -62,7 +62,34 @@ Tidak menggunakan React, Next.js, Vue, Tailwind, Bootstrap, jQuery, atau backend
 
 ---
 
-## 4. Cara Menambah Buku Baru (Future Editability)
+## 4. Sinkronisasi Otomatis Google Play Books (GitHub Actions)
+
+Website ini telah dilengkapi sistem otomatisasi penuh menggunakan **GitHub Actions**:
+- File workflow: `.github/workflows/sync-books.yml`
+- File skrip: `scripts/sync-books.mjs`
+
+### Cara Kerja:
+1. **Jadwal Otomatis**: Berjalan setiap hari tepat pukul **00:00 WIB** (17:00 UTC).
+2. **Pengecekan Cerdas**: Memeriksa Google Play Books untuk menemukan buku baru karya Isparmo.
+3. **Penyaringan Penulis**: Memastikan hanya buku yang benar-benar ditulis oleh Isparmo yang diproses.
+4. **Unduh Cover Resmi**: Otomatis mengunduh cover buku resmi beresolusi tinggi ke `images/covers/`.
+5. **Pembaruan Katalog**: Menambahkan entri buku baru ke `js/books.js`.
+6. **Auto Deploy**: Otomatis melakukan `git commit` dan `git push` ke branch `main`, sehingga GitHub Pages / Vercel langsung ter-update otomatis.
+
+### Menjalankan Sinkronisasi Manual:
+- **Dari GitHub**: Buka tab **Actions** di repositori GitHub > pilih workflow **"Sinkronisasi Otomatis Google Play Books"** > klik tombol **"Run workflow"**.
+- **Dari Komputer (Lokal)**: Jalankan perintah:
+  ```bash
+  npm run sync
+  ```
+  Atau untuk ID buku tertentu:
+  ```bash
+  node scripts/sync-books.mjs <GOOGLE_PLAY_BOOK_ID>
+  ```
+
+---
+
+## 5. Cara Menambah Buku Manual (Opsional)
 
 Website ini dirancang secara *future-proof*. Untuk menambahkan buku ke-7 atau seterusnya di masa depan:
 
