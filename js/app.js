@@ -169,30 +169,342 @@
       });
     }
 
-    // 3. Search Real-time Event
+    const heroSearchInput = document.getElementById("hero-search-input");
+    const heroSearchClearBtn = document.getElementById("hero-search-clear-btn");
+    const heroSearchBtn = document.getElementById("hero-search-btn");
+    const heroSearchDropdown = document.getElementById("hero-search-dropdown");
+    const quickTagBtns = document.querySelectorAll(".quick-tag-btn");
+
+    // Semantic Synonym & Smart Matcher (seperti pada toko.isparmo.com)
+    function matchesSearch(book, rawQuery) {
+      if (!rawQuery) return true;
+      const q = rawQuery.toLowerCase().trim();
+      if (!q) return true;
+
+      const title = (book.title || "").toLowerCase();
+      const subtitle = (book.subtitle || "").toLowerCase();
+      const author = (book.author || "").toLowerCase();
+      const category = (book.category || "").toLowerCase();
+      const resume = (book.resume || "").toLowerCase();
+      const tags = Array.isArray(book.tags) ? book.tags.join(" ").toLowerCase() : "";
+      const audience = Array.isArray(book.audience) ? book.audience.join(" ").toLowerCase() : "";
+
+      // Direct field matching
+      if (
+        title.includes(q) ||
+        subtitle.includes(q) ||
+        author.includes(q) ||
+        category.includes(q) ||
+        resume.includes(q) ||
+        tags.includes(q) ||
+        audience.includes(q)
+      ) {
+        return true;
+      }
+
+      // Semantic Synonym Matching
+      if (q === "buku" || q === "ebook" || q === "buku-buku" || q === "koleksi" || q === "semua") {
+        return true;
+      }
+
+      if (q === "gratis" || q === "free") {
+        return book.status === "FREE" || book.priceType === "free";
+      }
+
+      if (q === "ai" || q === "artificial intelligence" || q === "kecerdasan buatan" || q === "robot") {
+        return (
+          category.includes("ai") ||
+          tags.includes("ai") ||
+          title.includes("ai") ||
+          title.includes("cyborg") ||
+          title.includes("prompt") ||
+          resume.includes("ai") ||
+          resume.includes("kecerdasan buatan")
+        );
+      }
+
+      if (q === "guru" || q === "edukasi" || q === "sekolah" || q === "pendidikan" || q === "mengajar") {
+        return (
+          title.includes("guru") ||
+          subtitle.includes("guru") ||
+          tags.includes("guru") ||
+          tags.includes("pendidikan") ||
+          audience.includes("guru") ||
+          audience.includes("pendidik") ||
+          resume.includes("guru") ||
+          resume.includes("pendidikan")
+        );
+      }
+
+      if (q === "parenting" || q === "anak" || q === "keluarga" || q === "pernikahan" || q === "remaja" || q === "orang tua") {
+        return (
+          title.includes("generasi") ||
+          subtitle.includes("keluarga") ||
+          subtitle.includes("anak") ||
+          tags.includes("parenting") ||
+          tags.includes("keluarga") ||
+          audience.includes("orang tua") ||
+          resume.includes("anak") ||
+          resume.includes("keluarga")
+        );
+      }
+
+      if (q === "tenang" || q === "ketenangan" || q === "stres" || q === "cemas" || q === "mindfulness" || q === "jiwa" || q === "damai") {
+        return (
+          title.includes("tenang") ||
+          tags.includes("ketenangan") ||
+          resume.includes("tenang") ||
+          resume.includes("cemas") ||
+          resume.includes("jiwa")
+        );
+      }
+
+      if (q === "hikmah" || q === "spiritual" || q === "renungan" || q === "agama" || q === "iman" || q === "doa") {
+        return (
+          category.includes("spiritual") ||
+          tags.includes("spiritual") ||
+          tags.includes("renungan") ||
+          title.includes("hikmah") ||
+          resume.includes("hikmah") ||
+          resume.includes("spiritual")
+        );
+      }
+
+      if (q === "bahagia" || q === "kebahagiaan" || q === "syukur" || q === "berkah") {
+        return (
+          title.includes("bahagia") ||
+          tags.includes("kebahagiaan") ||
+          resume.includes("bahagia") ||
+          resume.includes("berkah")
+        );
+      }
+
+      if (q === "prompt" || q === "prompting" || q === "chatgpt" || q === "claude" || q === "gemini") {
+        return (
+          title.includes("prompt") ||
+          tags.includes("prompt") ||
+          resume.includes("prompt") ||
+          resume.includes("gemini")
+        );
+      }
+
+      if (q === "website" || q === "web" || q === "coding" || q === "pembuatan web") {
+        return (
+          title.includes("website") ||
+          tags.includes("website") ||
+          resume.includes("website")
+        );
+      }
+
+      return false;
+    }
+
+    function scrollToCatalog() {
+      const catalogEl = document.getElementById("katalog");
+      if (catalogEl) {
+        catalogEl.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    }
+
+    // Live Dropdown Hasil Pencarian di Hero (Sesuai toko.isparmo.com)
+    function updateHeroDropdown(query) {
+      if (!heroSearchDropdown) return;
+      const trimmed = (query || "").trim();
+
+      if (!trimmed) {
+        heroSearchDropdown.classList.remove("open");
+        heroSearchDropdown.innerHTML = "";
+        if (heroSearchClearBtn) heroSearchClearBtn.style.display = "none";
+        return;
+      }
+
+      if (heroSearchClearBtn) heroSearchClearBtn.style.display = "flex";
+
+      const matched = books.filter(b => matchesSearch(b, trimmed));
+
+      if (matched.length === 0) {
+        heroSearchDropdown.innerHTML = `
+          <div class="dropdown-no-results">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-bottom:0.4rem; color:var(--muted);"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+            <p>Tidak ada buku yang cocok dengan "<strong>${escapeHtml(trimmed)}</strong>".</p>
+          </div>
+        `;
+        heroSearchDropdown.classList.add("open");
+        return;
+      }
+
+      let itemsHtml = `
+        <div class="dropdown-header">
+          <span>Hasil Buku (${matched.length})</span>
+          <span class="dropdown-header-link" id="dropdown-scroll-all">Lihat di Katalog &darr;</span>
+        </div>
+      `;
+
+      matched.slice(0, 5).forEach(book => {
+        const isFree = book.status === "FREE" || book.priceType === "free";
+        const badgeClass = isFree ? "dropdown-item-badge badge-free" : "dropdown-item-badge";
+        const badgeText = isFree ? "Gratis" : escapeHtml(book.category);
+        const detailUrl = `book.html?id=${encodeURIComponent(book.id)}`;
+
+        itemsHtml += `
+          <a href="${detailUrl}" class="dropdown-item" data-id="${escapeHtml(book.id)}">
+            <img src="${escapeHtml(book.cover)}" alt="Cover" class="dropdown-item-cover" onerror="this.src='${PLACEHOLDER_COVER}'" />
+            <div class="dropdown-item-info">
+              <div class="dropdown-item-title">${escapeHtml(book.title)}</div>
+              <div class="dropdown-item-meta">
+                <span class="${badgeClass}">${badgeText}</span>
+                <span>&bull; ${book.pages} hlm</span>
+                <span>&bull; ${escapeHtml(book.author)}</span>
+              </div>
+            </div>
+            <span class="dropdown-item-btn">Buka</span>
+          </a>
+        `;
+      });
+
+      if (matched.length > 5) {
+        itemsHtml += `
+          <div class="dropdown-footer">
+            <button type="button" class="dropdown-footer-btn" id="dropdown-more-btn">
+              Lihat semua ${matched.length} buku di katalog &darr;
+            </button>
+          </div>
+        `;
+      }
+
+      heroSearchDropdown.innerHTML = itemsHtml;
+      heroSearchDropdown.classList.add("open");
+
+      const scrollAllBtn = document.getElementById("dropdown-scroll-all");
+      if (scrollAllBtn) {
+        scrollAllBtn.addEventListener("click", e => {
+          e.preventDefault();
+          heroSearchDropdown.classList.remove("open");
+          scrollToCatalog();
+        });
+      }
+
+      const moreBtn = document.getElementById("dropdown-more-btn");
+      if (moreBtn) {
+        moreBtn.addEventListener("click", e => {
+          e.preventDefault();
+          heroSearchDropdown.classList.remove("open");
+          scrollToCatalog();
+        });
+      }
+    }
+
+    // Sinkronisasi Dua Arah antara Hero Search dan Catalog Search
+    function syncSearch(query, shouldScroll = false) {
+      searchQuery = (query || "").trim();
+
+      if (searchInput && searchInput.value !== searchQuery) {
+        searchInput.value = searchQuery;
+      }
+      if (heroSearchInput && heroSearchInput.value !== searchQuery) {
+        heroSearchInput.value = searchQuery;
+      }
+
+      if (clearSearchBtn) {
+        if (searchQuery.length > 0) {
+          clearSearchBtn.classList.add("visible");
+        } else {
+          clearSearchBtn.classList.remove("visible");
+        }
+      }
+
+      if (heroSearchClearBtn) {
+        heroSearchClearBtn.style.display = searchQuery.length > 0 ? "flex" : "none";
+      }
+
+      // Reset category filter ke 'Semua' saat mencari agar semua hasil tampil
+      if (searchQuery) {
+        currentCategory = "Semua";
+        if (filterContainer) {
+          filterContainer.querySelectorAll(".filter-btn").forEach(b => {
+            b.classList.toggle("active", b.getAttribute("data-category") === "Semua");
+          });
+        }
+      }
+
+      applyFilterAndRender();
+      updateHeroDropdown(searchQuery);
+
+      if (shouldScroll) {
+        if (heroSearchDropdown) heroSearchDropdown.classList.remove("open");
+        scrollToCatalog();
+      }
+    }
+
+    // 3. Search Events (Catalog & Hero)
     if (searchInput) {
       searchInput.addEventListener("input", () => {
-        searchQuery = searchInput.value.trim().toLowerCase();
-        if (clearSearchBtn) {
-          if (searchQuery.length > 0) {
-            clearSearchBtn.classList.add("visible");
-          } else {
-            clearSearchBtn.classList.remove("visible");
-          }
-        }
-        applyFilterAndRender();
+        syncSearch(searchInput.value, false);
       });
     }
 
-    if (clearSearchBtn && searchInput) {
+    if (clearSearchBtn) {
       clearSearchBtn.addEventListener("click", () => {
-        searchInput.value = "";
-        searchQuery = "";
-        clearSearchBtn.classList.remove("visible");
-        searchInput.focus();
-        applyFilterAndRender();
+        syncSearch("", false);
+        if (searchInput) searchInput.focus();
       });
     }
+
+    if (heroSearchInput) {
+      heroSearchInput.addEventListener("input", () => {
+        syncSearch(heroSearchInput.value, false);
+      });
+
+      heroSearchInput.addEventListener("keydown", e => {
+        if (e.key === "Enter") {
+          syncSearch(heroSearchInput.value, true);
+        }
+        if (e.key === "Escape") {
+          if (heroSearchDropdown) heroSearchDropdown.classList.remove("open");
+        }
+      });
+
+      heroSearchInput.addEventListener("focus", () => {
+        if (heroSearchInput.value.trim() !== "") {
+          updateHeroDropdown(heroSearchInput.value);
+        }
+      });
+    }
+
+    if (heroSearchClearBtn) {
+      heroSearchClearBtn.addEventListener("click", () => {
+        syncSearch("", false);
+        if (heroSearchInput) heroSearchInput.focus();
+      });
+    }
+
+    if (heroSearchBtn) {
+      heroSearchBtn.addEventListener("click", () => {
+        const val = heroSearchInput ? heroSearchInput.value : "";
+        syncSearch(val, true);
+      });
+    }
+
+    // Quick Tag Buttons di Hero
+    quickTagBtns.forEach(btn => {
+      btn.addEventListener("click", () => {
+        const q = btn.getAttribute("data-query") || "";
+        syncSearch(q, true);
+      });
+    });
+
+    // Tutup Dropdown saat klik di luar
+    document.addEventListener("click", e => {
+      if (
+        heroSearchDropdown &&
+        !heroSearchDropdown.contains(e.target) &&
+        e.target !== heroSearchInput &&
+        e.target !== heroSearchBtn &&
+        !heroSearchBtn?.contains(e.target)
+      ) {
+        heroSearchDropdown.classList.remove("open");
+      }
+    });
 
     // 4. Sort Event
     if (sortSelect) {
@@ -210,23 +522,9 @@
           return false;
         }
 
-        // Cek query pencarian
+        // Cek query pencarian dengan smart semantic matching
         if (searchQuery) {
-          const title = (book.title || "").toLowerCase();
-          const subtitle = (book.subtitle || "").toLowerCase();
-          const author = (book.author || "").toLowerCase();
-          const category = (book.category || "").toLowerCase();
-          const resume = (book.resume || "").toLowerCase();
-          const tags = Array.isArray(book.tags) ? book.tags.join(" ").toLowerCase() : "";
-
-          const matched = title.includes(searchQuery) ||
-                          subtitle.includes(searchQuery) ||
-                          author.includes(searchQuery) ||
-                          category.includes(searchQuery) ||
-                          resume.includes(searchQuery) ||
-                          tags.includes(searchQuery);
-
-          if (!matched) return false;
+          return matchesSearch(book, searchQuery);
         }
 
         return true;

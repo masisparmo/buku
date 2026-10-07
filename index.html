@@ -71,6 +71,42 @@
           <h1 id="hero-title" class="hero-title">Buku Karya Isparmo</h1>
           <p class="hero-subtitle">Gagasan, pengetahuan, dan pengalaman yang dirangkum menjadi buku.</p>
           <p class="hero-desc">Temukan koleksi buku karya Isparmo, mulai dari kecerdasan buatan dan teknologi hingga refleksi kehidupan, kebahagiaan, dan spiritualitas.</p>
+          <!-- Dedicated Hero Search Bar (Sesuai toko.isparmo.com) -->
+          <div class="hero-search-wrapper">
+            <div class="hero-search-bar">
+              <svg class="search-bar-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+              </svg>
+              <input type="text" id="hero-search-input" class="search-bar-input" placeholder="Cari buku (misal: AI, Guru, Parenting, Tenang, Hikmah)..." aria-label="Cari buku karya Isparmo" autocomplete="off" />
+              <button type="button" id="hero-search-clear-btn" class="search-clear-btn" style="display:none;" aria-label="Hapus kata kunci pencarian">&times;</button>
+              <button type="button" class="search-bar-submit-btn" id="hero-search-btn">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <circle cx="11" cy="11" r="8"></circle>
+                  <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+                <span>Cari Buku</span>
+              </button>
+            </div>
+
+            <!-- Live Dropdown Results Preview -->
+            <div id="hero-search-dropdown" class="search-dropdown" role="region" aria-label="Hasil Pencarian Langsung"></div>
+
+            <!-- Quick Topic Chips -->
+            <div class="hero-search-tags">
+              <span class="tags-label">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c1.1 0 2 .9 2 2 0 .74-.4 1.38-1 1.72v1.56c2.8.44 5 2.87 5 5.82 0 1.9-.92 3.59-2.34 4.67l.84 2.52c.2.61-.25 1.23-.9 1.23-.42 0-.8-.27-.93-.68l-.83-2.5c-.27.05-.55.08-.84.08s-.57-.03-.84-.08l-.83 2.5c-.13.41-.51.68-.93.68-.65 0-1.1-.62-.9-1.23l.84-2.52C6.92 16.71 6 15.02 6 13.12c0-2.95 2.2-5.38 5-5.82V5.72c-.6-.34-1-.98-1-1.72 0-1.1.9-2 2-2z"/></svg>
+                Topik Populer:
+              </span>
+              <button type="button" class="quick-tag-btn" data-query="">📖 Semua Buku</button>
+              <button type="button" class="quick-tag-btn" data-query="ai">🤖 AI &amp; Edukasi</button>
+              <button type="button" class="quick-tag-btn" data-query="parenting">👨‍👩‍👧 Parenting</button>
+              <button type="button" class="quick-tag-btn" data-query="tenang">🌿 Ketenangan Batin</button>
+              <button type="button" class="quick-tag-btn" data-query="prompt">💡 Prompt Engineering</button>
+              <button type="button" class="quick-tag-btn" data-query="gratis">🎁 Buku Gratis</button>
+            </div>
+          </div>
+
           <div class="hero-actions">
             <a href="#katalog" class="btn btn-accent btn-lg">Jelajahi Koleksi</a>
             <a href="#tentang" class="btn btn-outline btn-lg">Tentang Penulis</a>
@@ -160,13 +196,45 @@
     <section class="about-section" id="tentang" aria-labelledby="about-heading">
       <div class="container">
         <div class="about-card">
-          <span class="section-label about-tag">Profil</span>
-          <h2 id="about-heading" class="about-title">Tentang Penulis</h2>
-          <p class="about-bio">
-            Isparmo adalah penulis, praktisi, edukator teknologi AI, dan inisiator Komunitas AI untuk Semua (KAIS). Melalui buku-bukunya, ia mencoba menerjemahkan gagasan tentang teknologi, kecerdasan buatan, produktivitas, kehidupan, dan spiritualitas ke dalam bahasa yang sederhana, praktis, dan mudah diterapkan.
-          </p>
-          <div class="about-action">
-            <a href="#katalog" class="btn btn-primary">Lihat Semua Buku</a>
+          <div class="about-grid">
+            <div class="about-image-wrapper">
+              <div class="about-photo-frame">
+                <img src="images/isparmo.jpg" alt="Isparmo - Penulis & Praktisi AI" class="about-photo" width="340" height="360" loading="lazy" />
+                <div class="about-photo-badge">
+                  <span class="badge-dot"></span>
+                  <span>Penulis &amp; Praktisi AI</span>
+                </div>
+              </div>
+            </div>
+            <div class="about-info">
+              <span class="section-label about-tag">Profil Penulis</span>
+              <h2 id="about-heading" class="about-title">Isparmo</h2>
+              <p class="about-role">Penulis Buku, Praktisi AI &amp; Inisiator KAIS (Komunitas AI untuk Semua)</p>
+              <p class="about-bio">
+                Isparmo adalah penulis, edukator teknologi AI, dan praktisi digital yang aktif mengkaji penerapan kecerdasan buatan dalam dunia pendidikan, produktivitas, serta penulisan kreatif. Melalui buku-bukunya, ia berikhtiar menerjemahkan teknologi dan gagasan kompleks menjadi panduan praktis yang mudah diakses dan diterapkan.
+              </p>
+              <p class="about-bio-secondary">
+                Selain tema kecerdasan buatan dan teknologi, ia juga menulis seri buku refleksi kehidupan, pengasuhan anak (parenting), dan spiritualitas praktis untuk mendampingi keluarga menghadapi dinamika tantangan zaman.
+              </p>
+              <div class="about-stats">
+                <div class="stat-item">
+                  <span class="stat-number">7+</span>
+                  <span class="stat-label">Buku Terbit Resmi</span>
+                </div>
+                <div class="stat-item">
+                  <span class="stat-number">KAIS</span>
+                  <span class="stat-label">Komunitas AI untuk Semua</span>
+                </div>
+                <div class="stat-item">
+                  <span class="stat-number">100%</span>
+                  <span class="stat-label">Praktis &amp; Teruji</span>
+                </div>
+              </div>
+              <div class="about-actions">
+                <a href="#katalog" class="btn btn-accent">Lihat Koleksi Buku</a>
+                <a href="https://toko.isparmo.com" target="_blank" rel="noopener noreferrer" class="btn btn-outline">Kunjungi Toko Online &rarr;</a>
+              </div>
+            </div>
           </div>
         </div>
       </div>
