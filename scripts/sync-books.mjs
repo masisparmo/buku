@@ -183,7 +183,9 @@ async function fetchBookDetail(bookId) {
   }
   
   // Deteksi status harga (Free / Paid)
-  const isFree = html.toLowerCase().includes('gratis') || html.includes('Rp 0');
+  // Catatan: Google Play menampilkan tombol "Contoh gratis" pada buku berbayar
+  const hasBuyPrice = /Beli\s+Rp|Rp\s*[\d.]+/i.test(html) && !html.includes('Rp 0');
+  const isFree = !hasBuyPrice && (html.toLowerCase().includes('buku gratis') || html.toLowerCase().includes('dapatkan gratis') || html.includes('Rp 0'));
   
   return {
     googlePlayId: bookId,

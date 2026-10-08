@@ -8,6 +8,41 @@
 
 const books = [
   {
+    id: "sistem-marketing-ai",
+    googlePlayId: "SpwWEgAAQBAJ",
+    googlePlayUrl: "https://play.google.com/store/books/details?id=SpwWEgAAQBAJ",
+    lynkUrl: "",
+    title: "CARA MUDAH MEMBUAT SISTEM MARKETING PRODUK MENGGUNAKAN AI",
+    subtitle: "Panduan Praktis Mengubah Kamera HP Menjadi Studio Foto, Desain Poster, Desain Video Iklan, dan Mesin Copywriting Otomatis",
+    author: "Isparmo",
+    pages: 135,
+    year: 2026,
+    publication: "Oktober 2026",
+    category: "AI & Teknologi",
+    publisher: "KAIS (Komunitas AI untuk Semua)",
+    cover: "images/covers/sistem-marketing-ai.webp",
+    featured: false,
+    priceType: "paid",
+    status: "AVAILABLE",
+    resume: "Buku panduan praktis dan aplikatif bagi pelaku UMKM, pemilik bisnis, dan kreator konten untuk membangun sistem pemasaran digital mandiri secara cepat dan efisien tanpa bergantung pada agensi mahal. Hanya bermodalkan kamera ponsel dan asisten AI (seperti ChatGPT, Gemini, Claude, dan AI Studio), Anda akan dipandu langkah demi langkah membangun 4 mesin pemasaran utama: Studio Foto Virtual (mengubah jepretan kamera HP menjadi foto katalog berkelas komersial), Desain Poster & Feed Promosi di Canva, Video Iklan Sinematik dinamis 5–15 detik untuk TikTok, Reels, dan Shopee Video, serta Mesin Copywriting Otomatis (formula AIDA, PAS, BAB). Dilengkapi studi kasus nyata di 6 sektor UMKM, lembar aksi 10 menit, Kamus Istilah Teknis Fotografi & AI, dan 50+ template prompt teruji tinggal pakai.",
+    tags: [
+      "AI",
+      "Marketing",
+      "UMKM",
+      "Prompt Engineering",
+      "Copywriting",
+      "Video Iklan",
+      "Fotografi Produk",
+      "Bisnis"
+    ],
+    audience: [
+      "Pelaku UMKM & Pemilik Bisnis",
+      "Content Creator & Marketer",
+      "Freelancer & Desainer",
+      "Penjual Online Shop"
+    ]
+  },
+  {
     id: "generasi-tanpa-arah",
     googlePlayId: "7VQUEgAAQBAJ",
     googlePlayUrl: "https://play.google.com/store/books/details?id=7VQUEgAAQBAJ",
