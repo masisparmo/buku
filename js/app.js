@@ -43,6 +43,112 @@
     return "Beli / Baca di Google Play";
   }
 
+  // ==========================================================================
+  // MANAJEMEN TEMA (DARK / LIGHT MODE)
+  // ==========================================================================
+  const THEME_STORAGE_KEY = "buku_isparmo_theme";
+
+  function setupTheme() {
+    const desktopToggle = document.getElementById("theme-toggle");
+    const mobileToggle = document.getElementById("mobile-theme-toggle");
+
+    function getPreferredTheme() {
+      try {
+        const stored = localStorage.getItem(THEME_STORAGE_KEY) || localStorage.getItem("theme");
+        if (stored === "dark" || stored === "light") {
+          return stored;
+        }
+      } catch (e) {}
+
+      if (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) {
+        return "dark";
+      }
+      return "light";
+    }
+
+    function applyTheme(theme, persist = true) {
+      // Tambahkan kelas transisi halus sementara
+      document.documentElement.classList.add("theme-transitioning");
+
+      document.documentElement.setAttribute("data-theme", theme);
+
+      if (persist) {
+        try {
+          localStorage.setItem(THEME_STORAGE_KEY, theme);
+          localStorage.setItem("theme", theme);
+        } catch (e) {}
+      }
+
+      updateThemeUI(theme);
+
+      // Hapus kelas transisi setelah animasi selesai
+      setTimeout(() => {
+        document.documentElement.classList.remove("theme-transitioning");
+      }, 300);
+    }
+
+    function updateThemeUI(theme) {
+      const isDark = theme === "dark";
+
+      if (desktopToggle) {
+        desktopToggle.setAttribute(
+          "aria-label",
+          isDark ? "Ganti ke mode terang" : "Ganti ke mode gelap"
+        );
+        desktopToggle.setAttribute(
+          "title",
+          isDark ? "Aktif: Mode Gelap (Klik untuk Terang)" : "Aktif: Mode Terang (Klik untuk Gelap)"
+        );
+      }
+
+      if (mobileToggle) {
+        mobileToggle.setAttribute(
+          "aria-label",
+          isDark ? "Ganti ke mode terang" : "Ganti ke mode gelap"
+        );
+        const textEl = mobileToggle.querySelector(".mobile-theme-text");
+        if (textEl) {
+          textEl.textContent = isDark ? "Mode Terang" : "Mode Gelap";
+        }
+        const pillEl = mobileToggle.querySelector(".mobile-theme-pill");
+        if (pillEl) {
+          pillEl.textContent = isDark ? "Aktif: Gelap" : "Aktif: Terang";
+        }
+      }
+    }
+
+    function toggleTheme() {
+      const current = document.documentElement.getAttribute("data-theme") || getPreferredTheme();
+      const nextTheme = current === "dark" ? "light" : "dark";
+      applyTheme(nextTheme, true);
+    }
+
+    if (desktopToggle) {
+      desktopToggle.addEventListener("click", toggleTheme);
+    }
+
+    if (mobileToggle) {
+      mobileToggle.addEventListener("click", toggleTheme);
+    }
+
+    // Dengarkan perubahan sistem OS jika pengguna belum set manual
+    if (window.matchMedia) {
+      try {
+        const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+        mediaQuery.addEventListener("change", (e) => {
+          const hasManual = localStorage.getItem(THEME_STORAGE_KEY) || localStorage.getItem("theme");
+          if (!hasManual) {
+            applyTheme(e.matches ? "dark" : "light", false);
+          }
+        });
+      } catch (e) {}
+    }
+
+    // Inisialisasi sinkronisasi UI
+    const initialTheme = document.documentElement.getAttribute("data-theme") || getPreferredTheme();
+    updateThemeUI(initialTheme);
+  }
+
   // Setup Global Header (Sticky effect & Mobile Menu)
   function setupHeader() {
     const header = document.querySelector(".site-header");
@@ -65,8 +171,8 @@
         mobileToggle.setAttribute("aria-expanded", String(isOpen));
       });
 
-      // Tutup drawer ketika link di klik
-      const drawerLinks = mobileDrawer.querySelectorAll("a");
+      // Tutup drawer ketika link navigasi di klik
+      const drawerLinks = mobileDrawer.querySelectorAll(".mobile-nav-link");
       drawerLinks.forEach(link => {
         link.addEventListener("click", () => {
           mobileDrawer.classList.remove("open");
@@ -847,6 +953,7 @@
 
   // Inisialisasi saat DOM siap
   document.addEventListener("DOMContentLoaded", () => {
+    setupTheme();
     setupHeader();
 
     const books = getBooksData();
