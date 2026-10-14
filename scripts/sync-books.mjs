@@ -161,7 +161,7 @@ async function fetchBookDetail(bookId) {
   }
   
   // Deteksi Halaman, Tahun & Kategori
-  const pagesMatch = html.match(/(\d+)\s+halaman/i);
+  const pagesMatch = html.match(/(\d+)\s+halaman/i) || html.match(/([0-9]{2,4})\s*<\/div>\s*<div[^>]*>Halaman/i);
   const pages = pagesMatch ? parseInt(pagesMatch[1], 10) : 100;
   
   const now = new Date();
@@ -172,7 +172,7 @@ async function fetchBookDetail(bookId) {
   // Klasifikasi kategori otomatis cerdas
   let category = 'AI & Teknologi';
   const lowerContent = (cleanTitle + ' ' + (subtitle || '') + ' ' + resume).toLowerCase();
-  if (lowerContent.includes('tenang') || lowerContent.includes('spiritual') || lowerContent.includes('doa') || lowerContent.includes('badai')) {
+  if (lowerContent.includes('tenang') || lowerContent.includes('spiritual') || lowerContent.includes('doa') || lowerContent.includes('badai') || lowerContent.includes('terima kasih') || lowerContent.includes('syukur')) {
     category = 'Spiritualitas';
   } else if (lowerContent.includes('bahagia') || lowerContent.includes('pengembangan diri') || lowerContent.includes('kebiasaan')) {
     category = 'Pengembangan Diri';
@@ -183,9 +183,9 @@ async function fetchBookDetail(bookId) {
   }
   
   // Deteksi status harga (Free / Paid)
-  // Catatan: Google Play menampilkan tombol "Contoh gratis" pada buku berbayar
-  const hasBuyPrice = /Beli\s+Rp|Rp\s*[\d.]+/i.test(html) && !html.includes('Rp 0');
-  const isFree = !hasBuyPrice && (html.toLowerCase().includes('buku gratis') || html.toLowerCase().includes('dapatkan gratis') || html.includes('Rp 0'));
+  const hasBuyButton = /<button[^>]*>[^<]*Beli\s+Rp[^<]*<\/button>/i.test(html) || /Beli\s+Rp\s*[\d.]+/i.test(html);
+  const hasFreeButton = /<button[^>]*>[^<]*Gratis[^<]*<\/button>/i.test(html);
+  const isFree = hasFreeButton || (!hasBuyButton && (html.toLowerCase().includes('buku gratis') || html.toLowerCase().includes('dapatkan gratis') || html.includes('Rp 0')));
   
   return {
     googlePlayId: bookId,
@@ -223,9 +223,10 @@ async function runSync() {
   const cliArgs = process.argv.slice(2);
   let candidateIds = [];
   
-  if (cliArgs.length > 0 && cliArgs[0].length === 12) {
-    console.log(`[SYNC] Menjalankan untuk ID dari parameter:`, cliArgs[0]);
-    candidateIds = [cliArgs[0]];
+  const validIds = cliArgs.filter(arg => arg.length === 12);
+  if (validIds.length > 0) {
+    console.log(`[SYNC] Menjalankan untuk ID dari parameter:`, validIds);
+    candidateIds = validIds;
   } else {
     candidateIds = await discoverBookIds();
   }

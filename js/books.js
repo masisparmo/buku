@@ -8,6 +8,75 @@
 
 const books = [
   {
+    id: "membuat-video-keren-dengan-google-flow",
+    googlePlayId: "CZQaEgAAQBAJ",
+    googlePlayUrl: "https://play.google.com/store/books/details?id=CZQaEgAAQBAJ",
+    lynkUrl: "",
+    title: "MEMBUAT VIDEO KEREN DENGAN GOOGLE FLOW",
+    subtitle: "Panduan Lengkap Pembuatan Video AI Sinematik Tanpa Kru: Dilengkapi 36+ Studi Kasus Terapan untuk Pelaku UMKM, Konten Kreator, dan Spesialis Media Sosial",
+    author: "Isparmo",
+    pages: 103,
+    year: 2026,
+    publication: "Oktober 2026",
+    category: "AI & Teknologi",
+    publisher: "KAIS (Komunitas AI untuk Semua)",
+    cover: "images/covers/membuat-video-keren-dengan-google-flow.webp",
+    featured: false,
+    priceType: "paid",
+    status: "AVAILABLE",
+    resume: "Di era digital saat ini, konten video menghasilkan interaksi dan konversi 5 hingga 10 kali lipat lebih tinggi dibanding foto statis. Namun, kendala biaya alat, kru, hingga rumitnya software editing sering kali membatasi pelaku usaha dan kreator. Buku pegangan praktis ini mengupas tuntas cara memproduksi video komersial dan sinematik beresolusi tinggi menggunakan Google Flow —studio film digital berbasis AI dari Google DeepMind. Melalui integrasi model terdepan seperti Google Veo 3/3.1, Imagen 4, dan Gemini Omni, Anda dapat menciptakan adegan memukau hanya dari foto sederhana atau instruksi teks percakapan. Dilengkapi 36+ studi kasus nyata, formula prompt siap pakai, manajemen kredit, hingga tips kontinuitas karakter, buku ini memandu Anda memproduksi video berkualitas bioskop secara mandiri, cepat, dan efisien.",
+    tags: [
+      "AI",
+      "Google Flow",
+      "Video AI",
+      "Prompt Engineering",
+      "UMKM",
+      "Content Creator",
+      "Sinematik",
+      "Google DeepMind"
+    ],
+    audience: [
+      "Pelaku UMKM & Pemilik Bisnis",
+      "Content Creator & Marketer",
+      "Social Media Specialist",
+      "Video Creator & Editor"
+    ]
+  },
+  {
+    id: "the-science-of-terima-kasih",
+    googlePlayId: "nZMaEgAAQBAJ",
+    googlePlayUrl: "https://play.google.com/store/books/details?id=nZMaEgAAQBAJ",
+    lynkUrl: "",
+    title: "THE SCIENCE OF TERIMA KASIH",
+    subtitle: "Jangan Anggap Remeh Kebaikan Orang Lain",
+    author: "Isparmo",
+    pages: 143,
+    year: 2026,
+    publication: "Oktober 2026",
+    category: "Spiritualitas",
+    publisher: "KAIS (Komunitas AI untuk Semua)",
+    cover: "images/covers/the-science-of-terima-kasih.webp",
+    featured: false,
+    priceType: "free",
+    status: "FREE",
+    resume: "Pernahkah Anda merasa hampa di tengah kecukupan materi, atau mendapati kehangatan hubungan perlahan mendingin tanpa sebab? Masalahnya sering kali berakar pada \"dehidrasi apresiasi\"—kondisi saat kebaikan orang-orang terdekat tak lagi terlihat karena tertutup rutinitas dan rasa merasa berhak (entitlement). Melalui perpaduan neurobiologi, psikologi relasional modern, dan nilai-nilai spiritualitas Islam, buku ini mengupas tuntas kekuatan transformatif di balik dua kata sederhana: terima kasih. Anda akan diajak memahami bagaimana apresiasi yang tulus bekerja di otak—memicu dopamin, serotonin, dan oksitosin—meredam stres, merekatkan kembali ikatan pernikahan, hingga membongkar bahaya kepalsuan basa-basi. Dilengkapi protokol praktis dan jurnal audit batin, buku ini menjadi panduan aplikatif untuk memulihkan kepekaan jiwa dan menghidupkan kembali kehangatan relasi Anda.",
+    tags: [
+      "Spiritualitas",
+      "Psikologi",
+      "Pengembangan Diri",
+      "Syukur",
+      "Relasi",
+      "Keluarga",
+      "Buku Isparmo"
+    ],
+    audience: [
+      "Pembaca Umum",
+      "Pasangan & Keluarga",
+      "Profesional & Leader",
+      "Pencari Ketenangan Batin"
+    ]
+  },
+  {
     id: "sistem-marketing-ai",
     googlePlayId: "SpwWEgAAQBAJ",
     googlePlayUrl: "https://play.google.com/store/books/details?id=SpwWEgAAQBAJ",
