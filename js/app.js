@@ -394,11 +394,17 @@
         );
       }
 
-      if (q === "website" || q === "web" || q === "coding" || q === "pembuatan web") {
+      if (q === "website" || q === "web" || q === "coding" || q === "pembuatan web" || q === "aplikasi" || q === "vibe coding" || q === "bikin aplikasi") {
         return (
+          title.includes("aplikasi") ||
           title.includes("website") ||
+          tags.includes("aplikasi") ||
           tags.includes("website") ||
-          resume.includes("website")
+          tags.includes("coding") ||
+          tags.includes("vibe coding") ||
+          resume.includes("aplikasi") ||
+          resume.includes("website") ||
+          resume.includes("coding")
         );
       }
 

@@ -8,6 +8,43 @@
 
 const books = [
   {
+    id: "mudah-bikin-aplikasi-pake-ai",
+    googlePlayId: "3BAbEgAAQBAJ",
+    googlePlayUrl: "https://play.google.com/store/books/details?id=3BAbEgAAQBAJ",
+    lynkUrl: "",
+    title: "MUDAH BIKIN APLIKASI PAKE AI",
+    subtitle: "Tanpa Harus Menguasai Bahasa Pemrograman",
+    author: "Isparmo",
+    pages: 192,
+    year: 2026,
+    publication: "Oktober 2026",
+    category: "AI & Teknologi",
+    publisher: "KAIS (Komunitas AI untuk Semua)",
+    cover: "images/covers/mudah-bikin-aplikasi-pake-ai.webp",
+    featured: false,
+    priceType: "paid",
+    status: "AVAILABLE",
+    resume: "Pernahkah Anda berpikir, \"Andai ada aplikasi untuk pekerjaan ini\" —tetapi langsung mundur karena merasa bukan programmer? Kini aturan itu sudah berubah. Lewat pendekatan vibe coding dengan Google AI Studio, Anda cukup menjelaskan kebutuhan dalam bahasa sehari-hari, lalu AI yang akan menyusunnya menjadi aplikasi web siap pakai tanpa perlu menghafal kode. Buku ini adalah panduan praktik langkah demi langkah yang dirancang khusus untuk pemula non-IT, dilengkapi dengan puluhan templat prompt siap pakai, studi kasus nyata untuk UMKM, Guru & Dosen, Mahasiswa, dan Profesional Non-IT, integrasi penyimpanan data, hingga panduan menerbitkan aplikasi ke publik.",
+    tags: [
+      "AI & Teknologi",
+      "Vibe Coding",
+      "Google AI Studio",
+      "No-Code",
+      "Aplikasi Web",
+      "Prompt Engineering",
+      "Pemula Non-IT",
+      "UMKM",
+      "Produktivitas"
+    ],
+    audience: [
+      "Pemula Non-IT & Awam Teknologi",
+      "Pelaku UMKM & Pemilik Bisnis",
+      "Guru, Dosen & Tenaga Pendidik",
+      "Pelajar & Mahasiswa",
+      "Profesional & Karyawan Kantor"
+    ]
+  },
+  {
     id: "membuat-video-keren-dengan-google-flow",
     googlePlayId: "CZQaEgAAQBAJ",
     googlePlayUrl: "https://play.google.com/store/books/details?id=CZQaEgAAQBAJ",
