@@ -290,134 +290,161 @@
     const heroSearchDropdown = document.getElementById("hero-search-dropdown");
     const quickTagBtns = document.querySelectorAll(".quick-tag-btn");
 
-    // Semantic Synonym & Smart Matcher (seperti pada toko.isparmo.com)
-    function matchesSearch(book, rawQuery) {
-      if (!rawQuery) return true;
+    // Intelligent Search Relevance Scorer (Memprioritaskan judul, topik, dan intent)
+    function getRelevanceScore(book, rawQuery) {
+      if (!rawQuery) return 0;
       const q = rawQuery.toLowerCase().trim();
-      if (!q) return true;
+      if (!q) return 0;
 
       const title = (book.title || "").toLowerCase();
       const subtitle = (book.subtitle || "").toLowerCase();
       const author = (book.author || "").toLowerCase();
       const category = (book.category || "").toLowerCase();
       const resume = (book.resume || "").toLowerCase();
-      const tags = Array.isArray(book.tags) ? book.tags.join(" ").toLowerCase() : "";
+      const tags = Array.isArray(book.tags) ? book.tags.map(t => t.toLowerCase()) : [];
+      const tagsStr = tags.join(" ");
       const audience = Array.isArray(book.audience) ? book.audience.join(" ").toLowerCase() : "";
 
-      // Direct field matching
-      if (
-        title.includes(q) ||
-        subtitle.includes(q) ||
-        author.includes(q) ||
-        category.includes(q) ||
-        resume.includes(q) ||
-        tags.includes(q) ||
-        audience.includes(q)
-      ) {
-        return true;
+      let score = 0;
+
+      // 1. Exact phrase matches (prioritas tertinggi)
+      if (title === q) {
+        score += 600;
+      } else if (title.startsWith(q)) {
+        score += 350;
+      } else if (title.includes(q)) {
+        score += 250;
       }
 
-      // Semantic Synonym Matching
-      if (q === "buku" || q === "ebook" || q === "buku-buku" || q === "koleksi" || q === "semua") {
-        return true;
+      // Word boundary regex untuk kecocokan kata utuh di judul
+      const escapedQuery = q.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+      const wordRegex = new RegExp(`\\b${escapedQuery}\\b`, "i");
+      if (wordRegex.test(title)) {
+        score += 150;
       }
 
+      if (subtitle.includes(q)) {
+        score += 100;
+        if (wordRegex.test(subtitle)) score += 50;
+      }
+
+      if (tags.some(t => t === q)) {
+        score += 150;
+      } else if (tagsStr.includes(q)) {
+        score += 80;
+      }
+
+      if (category.includes(q)) {
+        score += 60;
+      }
+
+      if (audience.includes(q)) {
+        score += 30;
+      }
+
+      // Bobot rendah untuk isi deskripsi (resume) agar kemunculan kata sekilas tidak mengalahkan buku utama
+      if (wordRegex.test(resume)) {
+        score += 20;
+      } else if (resume.includes(q)) {
+        score += 10;
+      }
+
+      // 2. Pencarian multi-kata (Token matching)
+      const words = q.split(/\s+/).filter(w => w.length > 1);
+      if (words.length > 1) {
+        let matchedWords = 0;
+        for (const w of words) {
+          let found = false;
+          if (title.includes(w)) {
+            score += 100;
+            found = true;
+          }
+          if (subtitle.includes(w)) {
+            score += 50;
+            found = true;
+          }
+          if (tagsStr.includes(w)) {
+            score += 50;
+            found = true;
+          }
+          if (category.includes(w)) {
+            score += 25;
+            found = true;
+          }
+          if (resume.includes(w)) {
+            score += 8;
+            found = true;
+          }
+          if (found) matchedWords++;
+        }
+        if (matchedWords === words.length) {
+          score += 150; // Bonus kecocokan seluruh kata kunci
+        }
+      }
+
+      // 3. Peringkat Semantik Cerdas untuk Topik & Intent Khusus
       if (q === "gratis" || q === "free") {
-        return book.status === "FREE" || book.priceType === "free";
+        if (book.status === "FREE" || book.priceType === "free") score += 350;
       }
 
-      if (q === "ai" || q === "artificial intelligence" || q === "kecerdasan buatan" || q === "robot") {
-        return (
-          category.includes("ai") ||
-          tags.includes("ai") ||
-          title.includes("ai") ||
-          title.includes("cyborg") ||
-          title.includes("prompt") ||
-          resume.includes("ai") ||
-          resume.includes("kecerdasan buatan")
-        );
+      if (q === "prompt" || q === "prompting" || q === "prompt engineering") {
+        if (book.id === "prompt-engineering") score += 450;
       }
 
-      if (q === "guru" || q === "edukasi" || q === "sekolah" || q === "pendidikan" || q === "mengajar") {
-        return (
-          title.includes("guru") ||
-          subtitle.includes("guru") ||
-          tags.includes("guru") ||
-          tags.includes("pendidikan") ||
-          audience.includes("guru") ||
-          audience.includes("pendidik") ||
-          resume.includes("guru") ||
-          resume.includes("pendidikan")
-        );
+      if (q === "chatgpt" || q === "gpt") {
+        if (book.id === "the-power-of-chatgpt") score += 450;
       }
 
-      if (q === "parenting" || q === "anak" || q === "keluarga" || q === "pernikahan" || q === "remaja" || q === "orang tua") {
-        return (
-          title.includes("generasi") ||
-          subtitle.includes("keluarga") ||
-          subtitle.includes("anak") ||
-          tags.includes("parenting") ||
-          tags.includes("keluarga") ||
-          audience.includes("orang tua") ||
-          resume.includes("anak") ||
-          resume.includes("keluarga")
-        );
+      if (q === "video" || q === "animasi" || q === "motion" || q === "motion graphics") {
+        if (book.id === "membuat-video-keren-dengan-google-flow") score += 280;
+        if (book.id.includes("motion-graphics")) score += 320;
       }
 
-      if (q === "tenang" || q === "ketenangan" || q === "stres" || q === "cemas" || q === "mindfulness" || q === "jiwa" || q === "damai") {
-        return (
-          title.includes("tenang") ||
-          tags.includes("ketenangan") ||
-          resume.includes("tenang") ||
-          resume.includes("cemas") ||
-          resume.includes("jiwa")
-        );
+      if (q === "guru" || q === "sekolah" || q === "mengajar" || q === "pendidik") {
+        if (book.id === "guru-cyborg") score += 400;
+        if (book.category === "Pendidikan") score += 150;
       }
 
-      if (q === "hikmah" || q === "spiritual" || q === "renungan" || q === "agama" || q === "iman" || q === "doa") {
-        return (
-          category.includes("spiritual") ||
-          tags.includes("spiritual") ||
-          tags.includes("renungan") ||
-          title.includes("hikmah") ||
-          resume.includes("hikmah") ||
-          resume.includes("spiritual")
-        );
+      if (q === "parenting" || q === "anak" || q === "keluarga" || q === "pernikahan") {
+        if (book.id === "generasi-tanpa-arah") score += 400;
+        if (book.id.includes("kesiapsiagaan-keluarga")) score += 180;
       }
 
-      if (q === "bahagia" || q === "kebahagiaan" || q === "syukur" || q === "berkah") {
-        return (
-          title.includes("bahagia") ||
-          tags.includes("kebahagiaan") ||
-          resume.includes("bahagia") ||
-          resume.includes("berkah")
-        );
+      if (q === "tenang" || q === "ketenangan" || q === "badai" || q === "ujian hidup") {
+        if (book.id === "seni-menemukan-tenang") score += 450;
       }
 
-      if (q === "prompt" || q === "prompting" || q === "chatgpt" || q === "claude" || q === "gemini") {
-        return (
-          title.includes("prompt") ||
-          tags.includes("prompt") ||
-          resume.includes("prompt") ||
-          resume.includes("gemini")
-        );
+      if (q === "olahraga" || q === "sehat" || q === "kebugaran") {
+        if (book.id === "ngapain-capek-olahraga") score += 450;
       }
 
-      if (q === "website" || q === "web" || q === "coding" || q === "pembuatan web" || q === "aplikasi" || q === "vibe coding" || q === "bikin aplikasi") {
-        return (
-          title.includes("aplikasi") ||
-          title.includes("website") ||
-          tags.includes("aplikasi") ||
-          tags.includes("website") ||
-          tags.includes("coding") ||
-          tags.includes("vibe coding") ||
-          resume.includes("aplikasi") ||
-          resume.includes("website") ||
-          resume.includes("coding")
-        );
+      if (q === "bencana" || q === "darurat" || q === "siaga") {
+        if (book.id.includes("kesiapsiagaan-keluarga")) score += 450;
       }
 
-      return false;
+      if (q === "matematika" || q === "tka") {
+        if (book.id.includes("matematika")) score += 400;
+      }
+
+      if (q === "website" || q === "web" || q === "vibe coding") {
+        if (book.id === "website-profesional-ai") score += 400;
+        if (book.id === "mudah-bikin-aplikasi-pake-ai") score += 300;
+      }
+
+      if (q === "terima kasih" || q === "syukur") {
+        if (book.id === "the-science-of-terima-kasih") score += 450;
+      }
+
+      if (q === "pujian" || q === "cinta") {
+        if (book.id === "the-power-of-pujian-dan-ungkapan-cinta") score += 450;
+      }
+
+      return score;
+    }
+
+    function matchesSearch(book, rawQuery) {
+      if (!rawQuery) return true;
+      return getRelevanceScore(book, rawQuery) > 0;
     }
 
     function scrollToCatalog() {
@@ -441,7 +468,11 @@
 
       if (heroSearchClearBtn) heroSearchClearBtn.style.display = "flex";
 
-      const matched = books.filter(b => matchesSearch(b, trimmed));
+      const matched = books
+        .map(b => ({ book: b, score: getRelevanceScore(b, trimmed) }))
+        .filter(item => item.score > 0)
+        .sort((a, b) => b.score - a.score)
+        .map(item => item.book);
 
       if (matched.length === 0) {
         heroSearchDropdown.innerHTML = `
@@ -653,6 +684,16 @@
 
       // Sorting
       filtered.sort((a, b) => {
+        // Jika sedang melakukan pencarian dan urutan default 'terbaru', urutkan berdasarkan RELEVANSI tertinggi
+        if (searchQuery && currentSort === "terbaru") {
+          const scoreA = getRelevanceScore(a, searchQuery);
+          const scoreB = getRelevanceScore(b, searchQuery);
+          if (scoreB !== scoreA) {
+            return scoreB - scoreA;
+          }
+          return (b.year || 0) - (a.year || 0);
+        }
+
         if (currentSort === "terbaru") {
           return (b.year || 0) - (a.year || 0);
         } else if (currentSort === "terlama") {
