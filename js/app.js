@@ -326,12 +326,22 @@
       }
 
       // 2. Pencocokan Subjudul
-      if (wordRegex.test(subtitle)) {
-        score += 250;
-        hasDirectMatch = true;
-      } else if (!isShort && subtitle.includes(q)) {
-        score += 150;
-        hasDirectMatch = true;
+      // Untuk query 1 kata (misal: 'prompt'), kata di subjudul seringkali hanyalah frasa pelengkap (misal: 'Modal Ketik Prompt'),
+      // sehingga tidak boleh memunculkan buku secara independen jika judul/tag tidak cocok.
+      // Subjudul hanya memicu pencocokan mandiri jika pengguna mencari frasa multi-kata (misal: 'ketik prompt').
+      const queryWords = q.split(/\s+/).filter(w => w.length > 0);
+      if (queryWords.length > 1) {
+        if (wordRegex.test(subtitle)) {
+          score += 250;
+          hasDirectMatch = true;
+        } else if (!isShort && subtitle.includes(q)) {
+          score += 150;
+          hasDirectMatch = true;
+        }
+      } else {
+        if (wordRegex.test(subtitle)) {
+          score += 50;
+        }
       }
 
       // 3. Pencocokan Tag / Topik Khusus
