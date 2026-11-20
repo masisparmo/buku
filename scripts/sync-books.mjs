@@ -70,21 +70,21 @@ function slugify(text) {
     .replace(/[^\w\s-]/g, '')
     .trim()
     .replace(/\s+/g, '-')
-    .slice(0, 45);
+    .slice(0, 80);
 }
 
 // Dapatkan daftar Google Play ID dari halaman pencarian Google Play Store
 async function discoverBookIds() {
   const searchUrl = 'https://play.google.com/store/search?q=isparmo&c=books&hl=id';
   console.log(`[SYNC] Mencari buku karya Isparmo di Google Play Store...`);
-  
+
   try {
     const res = await fetchUrl(searchUrl);
     if (res.statusCode !== 200) {
       console.warn(`[SYNC] Peringatan: Status HTTP ${res.statusCode} saat mencari di Google Play`);
       return [];
     }
-    
+
     const regex = /\["([A-Za-z0-9_-]{12})"/g;
     const matches = [...res.text.matchAll(regex)].map(m => m[1]);
     const uniqueIds = Array.from(new Set(matches));
@@ -100,15 +100,15 @@ async function discoverBookIds() {
 async function fetchBookDetail(bookId) {
   const detailUrl = `https://play.google.com/store/books/details?id=${bookId}&hl=id`;
   console.log(`[SYNC] Mengambil detail buku: ${bookId}...`);
-  
+
   const res = await fetchUrl(detailUrl);
   if (res.statusCode !== 200) {
     console.warn(`[SYNC] Buku ${bookId} mengembalikan HTTP ${res.statusCode}`);
     return null;
   }
-  
+
   const html = res.text;
-  
+
   // Ekstrak tag OpenGraph Title
   const ogTitleMatch = html.match(/<meta property="og:title" content="([^"]+)"/);
   const rawOgTitle = ogTitleMatch ? ogTitleMatch[1] : '';
@@ -117,20 +117,20 @@ async function fetchBookDetail(bookId) {
   // Format standar Google Play Books: "[Judul] oleh [Penulis] - Buku di Google Play"
   const authorMatch = rawOgTitle.match(/oleh\s+([^-]+)\s*-\s*Buku/i);
   const authorName = authorMatch ? authorMatch[1].trim() : '';
-  
+
   const isAuthorIsparmo = authorName.toLowerCase().includes('isparmo');
   if (!isAuthorIsparmo) {
     console.log(`[SYNC] ID ${bookId} diabaikan (Penulis bukan Isparmo: "${authorName || rawOgTitle}")`);
     return null;
   }
-  
+
   // Ekstrak Judul Bersih & Subjudul
   let cleanTitle = rawOgTitle
     .replace(/\s+oleh\s+.*$/i, '')
     .replace(/\s*-\s*Buku di Google Play.*$/i, '')
     .trim();
   let subtitle = null;
-  
+
   const subtitleMatch = cleanTitle.match(/^([^(]+)\s*\(([^)]+)\)$/);
   if (subtitleMatch) {
     cleanTitle = subtitleMatch[1].trim();
@@ -142,15 +142,15 @@ async function fetchBookDetail(bookId) {
       subtitle = colonMatch[2].trim();
     }
   }
-  
+
   // Ekstrak Deskripsi / Resume
   let resume = '';
   const descMatch = html.match(/<div[^>]*data-g-id="description"[^>]*>([\s\S]*?)<\/div>/) ||
-                    html.match(/<meta property="og:description" content="([^"]+)"/);
+    html.match(/<meta property="og:description" content="([^"]+)"/);
   if (descMatch) {
     resume = decodeHtml(descMatch[1]);
   }
-  
+
   // Ekstrak Cover Image
   const ogImageMatch = html.match(/<meta property="og:image" content="([^"]+)"/);
   let coverUrl = ogImageMatch ? ogImageMatch[1] : null;
@@ -159,34 +159,38 @@ async function fetchBookDetail(bookId) {
   } else {
     coverUrl = coverUrl.split('=')[0] + '=w800';
   }
-  
+
   // Deteksi Halaman, Tahun & Kategori
   const pagesMatch = html.match(/(\d+)\s+halaman/i) || html.match(/([0-9]{2,4})\s*<\/div>\s*<div[^>]*>Halaman/i);
   const pages = pagesMatch ? parseInt(pagesMatch[1], 10) : 100;
-  
+
   const now = new Date();
   const year = now.getFullYear();
   const months = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
   const publication = `${months[now.getMonth()]} ${year}`;
-  
+
   // Klasifikasi kategori otomatis cerdas
   let category = 'AI & Teknologi';
   const lowerContent = (cleanTitle + ' ' + (subtitle || '') + ' ' + resume).toLowerCase();
-  if (lowerContent.includes('tenang') || lowerContent.includes('spiritual') || lowerContent.includes('doa') || lowerContent.includes('badai') || lowerContent.includes('terima kasih') || lowerContent.includes('syukur')) {
+  if (lowerContent.includes('chatgpt') || lowerContent.includes('prompt') || lowerContent.includes('ai ') || lowerContent.includes('kecerdasan buatan') || lowerContent.includes('mcp') || lowerContent.includes('coding') || lowerContent.includes('google flow') || lowerContent.includes('deepmind') || lowerContent.includes('veo')) {
+    category = 'AI & Teknologi';
+  } else if (lowerContent.includes('matematika') || lowerContent.includes('tka') || lowerContent.includes('ujian') || lowerContent.includes('akademik')) {
+    category = 'Pendidikan';
+  } else if (lowerContent.includes('tenang') || lowerContent.includes('spiritual') || lowerContent.includes('doa') || lowerContent.includes('badai') || lowerContent.includes('terima kasih') || lowerContent.includes('syukur') || lowerContent.includes('pujian') || lowerContent.includes('ungkapan cinta')) {
     category = 'Spiritualitas';
-  } else if (lowerContent.includes('bahagia') || lowerContent.includes('pengembangan diri') || lowerContent.includes('kebiasaan')) {
+  } else if (lowerContent.includes('bahagia') || lowerContent.includes('pengembangan diri') || lowerContent.includes('kebiasaan') || lowerContent.includes('olahraga') || lowerContent.includes('bencana') || lowerContent.includes('keluarga')) {
     category = 'Pengembangan Diri';
   } else if (lowerContent.includes('hikmah') || lowerContent.includes('catatan') || lowerContent.includes('keseharian')) {
     category = 'Refleksi Kehidupan';
   } else if (lowerContent.includes('produktivitas') || lowerContent.includes('waktu') || lowerContent.includes('fokus')) {
     category = 'Produktivitas';
   }
-  
+
   // Deteksi status harga (Free / Paid)
-  const hasBuyButton = /<button[^>]*>[^<]*Beli\s+Rp[^<]*<\/button>/i.test(html) || /Beli\s+Rp\s*[\d.]+/i.test(html);
-  const hasFreeButton = /<button[^>]*>[^<]*Gratis[^<]*<\/button>/i.test(html);
-  const isFree = hasFreeButton || (!hasBuyButton && (html.toLowerCase().includes('buku gratis') || html.toLowerCase().includes('dapatkan gratis') || html.includes('Rp 0')));
-  
+  const hasBuyButton = /<button[^>]*>[\s\S]*?Beli\s+Rp[\s\S]*?<\/button>/i.test(html) || /Beli\s+Rp\s*[\d.]+/i.test(html);
+  const hasFreeButton = /<button[^>]*>[\s\S]*?Gratis[\s\S]*?<\/button>/i.test(html);
+  const isFree = hasFreeButton && !hasBuyButton;
+
   return {
     googlePlayId: bookId,
     googlePlayUrl: `https://play.google.com/store/books/details?id=${bookId}`,
@@ -212,46 +216,67 @@ async function fetchBookDetail(bookId) {
 // Main Runner
 async function runSync() {
   console.log(`[SYNC] Memulai sinkronisasi katalog buku Isparmo...`);
-  
+
   // 1. Baca data buku yang sudah ada di js/books.js
   const booksJsContent = fs.readFileSync(booksJsPath, 'utf8');
-  const existingIdMatches = [...booksJsContent.matchAll(/googlePlayId:\s*["']([^"']+)["']/g)].map(m => m[1]);
+  const existingIdMatches = [...booksJsContent.matchAll(/["']?googlePlayId["']?\s*:\s*["']([^"']+)["']/g)].map(m => m[1]);
   const existingIds = new Set(existingIdMatches);
-  console.log(`[SYNC] Buku yang sudah terdaftar di website:`, Array.from(existingIds));
-  
-  // 2. Dapatkan ID buku dari argumen CLI jika ada (misal: node sync-books.mjs Bgr4EQAAQBAJ)
+  console.log(`[SYNC] Buku yang sudah terdaftar di website (${existingIds.size} buku):`, Array.from(existingIds));
+
+  // 2. Dapatkan ID buku dari argumen CLI jika ada (misal: node sync-books.mjs Bgr4EQAAQBAJ atau GGKEY:...)
   const cliArgs = process.argv.slice(2);
   let candidateIds = [];
-  
-  const validIds = cliArgs.filter(arg => arg.length === 12);
-  if (validIds.length > 0) {
-    console.log(`[SYNC] Menjalankan untuk ID dari parameter:`, validIds);
-    candidateIds = validIds;
+
+  for (const arg of cliArgs) {
+    if (arg.length === 12 && !arg.includes(':') && !arg.includes('/')) {
+      candidateIds.push(arg);
+    } else {
+      // Periksa apakah argumen mengandung GGKEY
+      const ggkeyMatch = arg.match(/GGKEY:([A-Za-z0-9_-]+)/i);
+      if (ggkeyMatch) {
+        const ggkey = ggkeyMatch[0];
+        console.log(`[SYNC] Mendeteksi identifier ${ggkey}, mencari volume ID...`);
+        try {
+          const res = await fetchUrl(`https://books.google.com/books?vid=${ggkey}`);
+          const volMatch = res.text.match(/id=([A-Za-z0-9_-]{12})/i);
+          if (volMatch) {
+            console.log(`[SYNC] GGKEY ${ggkey} terpetakan ke Google Play Volume ID: ${volMatch[1]}`);
+            candidateIds.push(volMatch[1]);
+          }
+        } catch (e) {
+          console.warn(`[SYNC] Gagal mengonversi GGKEY ${ggkey}:`, e.message);
+        }
+      }
+    }
+  }
+
+  if (candidateIds.length > 0) {
+    console.log(`[SYNC] Menjalankan untuk ID dari parameter:`, candidateIds);
   } else {
     candidateIds = await discoverBookIds();
   }
-  
+
   // 3. Saring ID yang belum ada
   const newIds = candidateIds.filter(id => !existingIds.has(id));
-  
+
   if (newIds.length === 0) {
     console.log(`[SYNC] Tidak ada buku baru yang ditemukan. Katalog sudah yang terbaru.`);
     return;
   }
-  
+
   console.log(`[SYNC] Ditemukan ${newIds.length} buku baru untuk disinkronkan:`, newIds);
-  
+
   const newBookObjects = [];
-  
+
   for (const id of newIds) {
     try {
       const bookData = await fetchBookDetail(id);
       if (!bookData) continue;
-      
+
       const slug = slugify(bookData.title) || `buku-${id.toLowerCase()}`;
       const coverFilename = `${slug}.webp`;
       const coverFilePath = path.join(coversDir, coverFilename);
-      
+
       // Unduh cover buku resmi
       console.log(`[SYNC] Mengunduh cover untuk ${bookData.title} -> ${coverFilename}...`);
       try {
@@ -266,29 +291,29 @@ async function runSync() {
         console.warn(`[SYNC] Gagal mengunduh cover untuk ${id}:`, imgErr.message);
         bookData.cover = 'images/covers/PLACEHOLDER.jpg';
       }
-      
+
       delete bookData.coverUrl;
       bookData.id = slug;
-      
+
       newBookObjects.push(bookData);
     } catch (err) {
       console.error(`[SYNC] Error memproses buku ${id}:`, err.message);
     }
   }
-  
+
   if (newBookObjects.length === 0) {
     console.log(`[SYNC] Tidak ada buku baru yang valid untuk ditambahkan.`);
     return;
   }
-  
+
   // 4. Perbarui js/books.js dengan menambahkan buku baru di awal daftar
   console.log(`[SYNC] Menambahkan ${newBookObjects.length} buku baru ke js/books.js...`);
-  
+
   // Template JSON rapi
   const newEntriesString = newBookObjects.map(b => '  ' + JSON.stringify(b, null, 2).replace(/\n/g, '\n  ')).join(',\n') + ',\n';
-  
+
   const updatedContent = booksJsContent.replace(/(const books\s*=\s*\[\s*\n)/, `$1${newEntriesString}`);
-  
+
   fs.writeFileSync(booksJsPath, updatedContent, 'utf8');
   console.log(`[SYNC] Sukses! js/books.js telah diperbarui.`);
 }

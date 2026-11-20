@@ -23,10 +23,19 @@
   // Fallback cover jika gambar gagal dimuat
   const PLACEHOLDER_COVER = "images/covers/PLACEHOLDER.jpg";
 
-  // Periksa ketersediaan data buku
+  // Periksa ketersediaan data buku (dengan deduplikasi pengaman)
   function getBooksData() {
     if (typeof window !== "undefined" && Array.isArray(window.BOOKS_DATA)) {
-      return window.BOOKS_DATA;
+      const seen = new Set();
+      const uniqueBooks = [];
+      for (const book of window.BOOKS_DATA) {
+        const key = book.googlePlayId || book.id;
+        if (key && !seen.has(key)) {
+          seen.add(key);
+          uniqueBooks.push(book);
+        }
+      }
+      return uniqueBooks;
     }
     console.error("DATA ERROR: window.BOOKS_DATA tidak ditemukan.");
     return null;
