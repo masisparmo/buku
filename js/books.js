@@ -8,6 +8,34 @@
 
 const books = [
   {
+    "googlePlayId": "TvQxEgAAQBAJ",
+    "googlePlayUrl": "https://play.google.com/store/books/details?id=TvQxEgAAQBAJ",
+    "lynkUrl": "",
+    "title": "COMPLETE GUIDE TO FAMILY DISASTER PREPAREDNESS",
+    "subtitle": "Calm, Planned, and Ready in Every Climate",
+    "author": "Isparmo",
+    "pages": 399,
+    "year": 2026,
+    "publication": "November 2026",
+    "category": "AI & Teknologi",
+    "publisher": "KAIS (Komunitas AI untuk Semua)",
+    "featured": false,
+    "priceType": "free",
+    "status": "FREE",
+    "resume": "Disasters rarely give enough warning. An earthquake strikes in seconds, a flash flood rises in minutes, and a long power outage can shut down water, payments, and phone networks all at once. In those first hours and days, the people your family can rely on most are yourselves and your neighbours. Complete Guide to Family Disaster Preparedness (International Edition) is a calm, practical handbook that helps any household plan ahead, whatever the climate or country. Built on guidance from FEMA , the CDC , the WHO , the IFRC , the Red Cross , and national disaster agencies , it turns official advice into clear steps your whole family can follow. Inside you will find 22 chapters in seven parts: - Foundations: the 72-hour mindset, go-bags, car kits, rotating supplies, and a non-digital family communication plan - Natural disasters: floods, earthquakes, tsunamis, house and wildfires, tropical storms and tornadoes - Extreme climate and geology: winter storms, heat waves, drought, landslides, and volcanic ash - Infrastructure collapse and CBRN threats: long blackouts, internet and digital payment failures, telecom outages, supply crises, radiation, chemical emergencies, and pandemics - People in crisis: long-term mental resilience, civil unrest, and de-escalation - Water, sanitation, and community: safe water, emergency toilets, outbreak prevention, and neighbourhood mutual aid - Away from home: surviving in forests, mountains, coasts, deserts, and snow Every chapter follows the same pattern: what to do before, during, and after, common mistakes to avoid, a ready-to-use checklist, and a list of sources. A fast-track reading guide, emergency numbers for different countries, and print-ready forms and checklists in the appendices help you act quickly. Prepared, not afraid: small steps taken today can decide your family's safety tomorrow.",
+    "tags": [
+      "AI & Teknologi",
+      "Buku Isparmo",
+      "Google Play Books"
+    ],
+    "audience": [
+      "Pembaca Umum",
+      "Profesional"
+    ],
+    "cover": "images/covers/complete-guide-to-family-disaster-preparedness.webp",
+    "id": "complete-guide-to-family-disaster-preparedness"
+  },
+  {
     "id": "the-power-of-chatgpt",
     "googlePlayId": "2gAwEgAAQBAJ",
     "googlePlayUrl": "https://play.google.com/store/books/details?id=2gAwEgAAQBAJ",
