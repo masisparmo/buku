@@ -426,12 +426,17 @@
         hasDirectMatch = true;
       }
 
-      if ((q === "stress" || q === "stres" || q === "first aid") && book.id === "first-aid-when-stress-strikes") {
+      if ((q === "stress" || q === "stres" || q === "first aid") && (book.id === "first-aid-when-stress-strikes" || book.id === "pertolongan-pertama-saat-stres-menyerang")) {
         score += 800;
         hasDirectMatch = true;
       }
 
-      if (q === "bencana" && book.id.includes("kesiapsiagaan-keluarga")) {
+      if ((q === "bullying" || q === "perundungan") && book.id === "stop-bullying") {
+        score += 800;
+        hasDirectMatch = true;
+      }
+
+      if ((q === "bencana" || q === "disaster") && (book.id.includes("kesiapsiagaan-keluarga") || book.id.includes("disaster-preparedness"))) {
         score += 800;
         hasDirectMatch = true;
       }

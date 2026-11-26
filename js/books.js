@@ -43,6 +43,104 @@ const books = [
     ]
   },
   {
+    "id": "pertolongan-pertama-saat-stres-menyerang",
+    "googlePlayId": "Mt4yEgAAQBAJ",
+    "googlePlayUrl": "https://play.google.com/store/books/details?id=Mt4yEgAAQBAJ",
+    "lynkUrl": "",
+    "title": "Pertolongan Pertama Saat Stres Menyerang",
+    "subtitle": "5 Menit Kembali Tenang ala Psikologi Modern dan Islam",
+    "author": "Isparmo",
+    "pages": 131,
+    "year": 2026,
+    "publication": "November 2026",
+    "category": "Pengembangan Diri",
+    "publisher": "KAIS (Komunitas AI untuk Semua)",
+    "cover": "images/covers/pertolongan-pertama-saat-stres-menyerang.webp",
+    "featured": false,
+    "priceType": "free",
+    "status": "FREE",
+    "resume": "Dada sesak, pikiran penuh, rasanya ingin meledak atau menangis? Saat stres menyerang, Anda tidak butuh teori panjang. Anda butuh langkah yang sederhana, cepat, dan bisa langsung dipraktikkan. Buku ini bekerja seperti kotak P3K: dibuka saat butuh, lalu langsung diambil yang diperlukan. Di dalamnya ada REDAM, protokol lima langkah sekitar lima menit yang memadukan psikologi modern dengan tuntunan Islam (doa, dzikir, dan teladan Rasulullah). Dilengkapi Kartu Darurat REDAM, penjelasan ilmiah, panduan situasi rumah, kantor, dan kelas, serta lampiran lembar kerja 14 hari.",
+    "tags": [
+      "Pengembangan Diri",
+      "Stress Relief",
+      "Kesehatan Mental",
+      "Psikologi",
+      "Sakinah",
+      "Buku Isparmo"
+    ],
+    "audience": [
+      "Pembaca Umum",
+      "Profesional",
+      "Keluarga"
+    ]
+  },
+  {
+    "id": "stop-bullying",
+    "googlePlayId": "X1oyEgAAQBAJ",
+    "googlePlayUrl": "https://play.google.com/store/books/details?id=X1oyEgAAQBAJ",
+    "lynkUrl": "",
+    "title": "STOP BULLYING!",
+    "subtitle": "Panduan Lengkap Penanganan Perundungan untuk Siswa, Guru, dan Orang Tua",
+    "author": "Isparmo",
+    "pages": 194,
+    "year": 2026,
+    "publication": "November 2026",
+    "category": "Pendidikan",
+    "publisher": "KAIS (Komunitas AI untuk Semua)",
+    "cover": "images/covers/stop-bullying.webp",
+    "featured": false,
+    "priceType": "free",
+    "status": "FREE",
+    "resume": "Panduan terpadu penanganan perundungan (bullying) berbasis riset dan aturan sekolah terbaru 2026 yang ditulis dengan bahasa sehari-hari yang hangat, jelas, dan langsung bisa dipraktikkan oleh siswa SD, SMP, SMA/SMK, guru, dan orang tua. Disusun mengikuti Alur 5M: Mengenali, Mencegah, Melaporkan, Melindungi, dan Memulihkan. Selaras dengan Permendikdasmen No. 6 Tahun 2026 tentang Budaya Sekolah Aman dan Nyaman (BSAN). Dilengkapi penanganan cyberbullying, Rumus 5-Info untuk melapor aman, protokol menit pertama guru, dan 15 lampiran praktis siap cetak.",
+    "tags": [
+      "Pendidikan",
+      "Bullying",
+      "Parenting",
+      "Sekolah Aman",
+      "Pengembangan Diri",
+      "Buku Isparmo"
+    ],
+    "audience": [
+      "Siswa SD, SMP, SMA/SMK",
+      "Guru & Tenaga Pendidik",
+      "Orang Tua",
+      "Kepala Sekolah & Pendidik"
+    ]
+  },
+  {
+    "id": "complete-guide-to-family-disaster-preparedness",
+    "googlePlayId": "TvQxEgAAQBAJ",
+    "googlePlayUrl": "https://play.google.com/store/books/details?id=TvQxEgAAQBAJ",
+    "lynkUrl": "",
+    "title": "COMPLETE GUIDE TO FAMILY DISASTER PREPAREDNESS",
+    "subtitle": "Calm, Planned, and Ready in Every Climate",
+    "author": "Isparmo",
+    "pages": 399,
+    "year": 2026,
+    "publication": "November 2026",
+    "category": "Pengembangan Diri",
+    "publisher": "KAIS (Komunitas AI untuk Semua)",
+    "cover": "images/covers/complete-guide-to-family-disaster-preparedness.webp",
+    "featured": false,
+    "priceType": "free",
+    "status": "FREE",
+    "resume": "A calm, practical handbook that helps any household plan ahead for emergencies and disasters, whatever the climate or country. Built on official guidance from FEMA, CDC, WHO, IFRC, and national disaster agencies. Covers 22 chapters across seven parts: 72-hour mindset, go-bags, car kits, rotating supplies, non-digital family communications, natural disasters, climate extremes, infrastructure collapse, blackouts, supply crises, and survival guides. Includes checklists and emergency numbers.",
+    "tags": [
+      "Kesiapsiagaan Bencana",
+      "Disaster Preparedness",
+      "Keluarga",
+      "Survival",
+      "Pengembangan Diri",
+      "Buku Isparmo"
+    ],
+    "audience": [
+      "Kepala Keluarga & Orang Tua",
+      "Komunitas Internasional",
+      "Masyarakat Umum",
+      "Relawan"
+    ]
+  },
+  {
     "id": "the-power-of-chatgpt",
     "googlePlayId": "2gAwEgAAQBAJ",
     "googlePlayUrl": "https://play.google.com/store/books/details?id=2gAwEgAAQBAJ",
