@@ -8,6 +8,62 @@
 
 const books = [
   {
+    "googlePlayId": "Mt4yEgAAQBAJ",
+    "googlePlayUrl": "https://play.google.com/store/books/details?id=Mt4yEgAAQBAJ",
+    "lynkUrl": "",
+    "title": "Pertolongan Pertama Saat Stres Menyerang",
+    "subtitle": "5 Menit Kembali Tenang ala Psikologi Modern dan Islam",
+    "author": "Isparmo",
+    "pages": 131,
+    "year": 2026,
+    "publication": "November 2026",
+    "category": "AI & Teknologi",
+    "publisher": "KAIS (Komunitas AI untuk Semua)",
+    "featured": false,
+    "priceType": "free",
+    "status": "FREE",
+    "resume": "Dada sesak, pikiran penuh, rasanya ingin meledak atau menangis? Saat stres menyerang, Anda tidak butuh teori panjang. Anda butuh langkah yang sederhana, cepat, dan bisa langsung dipraktikkan. Buku ini bekerja seperti kotak P3K: dibuka saat butuh, lalu langsung diambil yang diperlukan. Di dalamnya ada REDAM, protokol lima langkah sekitar lima menit yang memadukan psikologi modern (cara kerja tubuh dan pikiran saat stres, serta teknik menenangkan diri yang sudah diteliti) dengan tuntunan Islam (doa, dzikir, dan teladan Rasulullah, dengan dalil yang sumber dan derajatnya diperiksa dengan jujur). Yang akan Anda temukan: - Kartu Darurat REDAM yang bisa difoto dan dijadikan wallpaper HP - Penjelasan sederhana tentang apa itu stres dan tanda-tandanya - Alasan ilmiah kenapa REDAM bisa menenangkan - Panduan REDAM untuk berbagai situasi: di rumah (ayah, ibu, suami, istri), di kantor dan di kelas (pekerja dan guru), saat sendiri dan di usia senja, serta untuk anak dan remaja yang menghadapi ujian, presentasi, atau lomba - Kebiasaan agar stres tidak gampang datang lagi, dan kapan perlu minta bantuan profesional - Lampiran berisi kartu, lembar kerja, program 14 hari, kumpulan doa, dan daftar pustaka Cocok untuk siapa saja yang ingin lebih tenang menghadapi tekanan sehari-hari, dan untuk dibagikan kepada keluarga. Catatan: buku ini adalah panduan pertolongan pertama untuk stres sehari-hari dan tidak menggantikan pemeriksaan, diagnosis, atau pengobatan oleh dokter, psikolog, maupun psikiater.",
+    "tags": [
+      "AI & Teknologi",
+      "Buku Isparmo",
+      "Google Play Books"
+    ],
+    "audience": [
+      "Pembaca Umum",
+      "Profesional"
+    ],
+    "cover": "images/covers/pertolongan-pertama-saat-stres-menyerang.webp",
+    "id": "pertolongan-pertama-saat-stres-menyerang"
+  },
+  {
+    "googlePlayId": "X1oyEgAAQBAJ",
+    "googlePlayUrl": "https://play.google.com/store/books/details?id=X1oyEgAAQBAJ",
+    "lynkUrl": "",
+    "title": "STOP BULLYING!",
+    "subtitle": "Panduan Lengkap Penanganan Perundungan untuk Siswa, Guru, dan Orang Tua",
+    "author": "Isparmo",
+    "pages": 194,
+    "year": 2026,
+    "publication": "November 2026",
+    "category": "AI & Teknologi",
+    "publisher": "KAIS (Komunitas AI untuk Semua)",
+    "featured": false,
+    "priceType": "free",
+    "status": "FREE",
+    "resume": "Banyak anak berangkat ke sekolah dengan tas yang rapi, namun menyimpan rasa cemas: takut diejek, dipalak, dikucilkan, atau diserang di grup chat kelas. Di sisi lain, banyak guru dan orang tua sangat peduli, tetapi bingung harus berbuat apa di menit-menit pertama ketika perundungan benar-benar terjadi. STOP BULLYING! adalah panduan terpadu berbasis riset dan aturan sekolah terbaru 2026 yang ditulis dengan bahasa sehari-hari yang hangat, jelas, dan langsung bisa dipraktikkan oleh siswa SD, SMP, SMA/SMK, guru, dan orang tua. Buku ini disusun mengikuti Alur 5M: Mengenali, Mencegah, Melaporkan, Melindungi, dan Memulihkan. Apa yang ada di dalam buku ini? - 22 bab lengkap dalam 6 bagian, dengan kotak Ringkasan Materi di awal setiap bab, contoh kejadian nyata, dialog siap pakai, dan panduan per jenjang sekolah. - Selaras dengan Permendikdasmen Nomor 6 Tahun 2026 tentang Budaya Sekolah Aman dan Nyaman (BSAN). - Berpijak pada 18 sumber riset dan regulasi resmi, antara lain OECD PISA 2025, UNICEF ROOTS, NAMHS, dan GSHS. - Penanganan cyberbullying, cara melapor yang aman dengan Rumus 5-Info, serta protokol menit pertama untuk guru. - Panduan khusus bagi orang tua saat anak menjadi korban maupun pelaku. - 15 lampiran praktis siap cetak: formulir laporan, bagan langkah cepat guru, kontrak perilaku, lembar pantau 30-60-90 hari, hingga daftar kontak darurat. Cocok untuk siswa yang ingin berani bersikap, guru dan sekolah yang ingin membangun budaya aman, serta orang tua yang ingin mendampingi anak dengan tepat. Harapannya sederhana: agar tidak ada lagi anak Indonesia yang merasa harus menghadapi perundungan sendirian.",
+    "tags": [
+      "AI & Teknologi",
+      "Buku Isparmo",
+      "Google Play Books"
+    ],
+    "audience": [
+      "Pembaca Umum",
+      "Profesional"
+    ],
+    "cover": "images/covers/stop-bullying.webp",
+    "id": "stop-bullying"
+  },
+  {
     "googlePlayId": "TvQxEgAAQBAJ",
     "googlePlayUrl": "https://play.google.com/store/books/details?id=TvQxEgAAQBAJ",
     "lynkUrl": "",
