@@ -8,6 +8,41 @@
 
 const books = [
   {
+    "id": "first-aid-when-stress-strikes",
+    "googlePlayId": "nGIzEgAAQBAJ",
+    "googlePlayUrl": "https://play.google.com/store/books/details?id=nGIzEgAAQBAJ",
+    "lynkUrl": "",
+    "title": "FIRST AID WHEN STRESS STRIKES",
+    "subtitle": "5 Minutes Back to Calm with Modern Psychology and Islam",
+    "author": "Isparmo",
+    "pages": 105,
+    "year": 2026,
+    "publication": "November 2026",
+    "category": "Pengembangan Diri",
+    "publisher": "Isparmo",
+    "cover": "images/covers/first-aid-when-stress-strikes.webp",
+    "featured": false,
+    "priceType": "paid",
+    "status": "AVAILABLE",
+    "resume": "When stress strikes, you need help in minutes, not months. Buku ini memadukan dua sayap ketenangan: sistem saraf yang dipelajari dalam psikologi modern dan sakinah (ketenteraman batin) yang berakar dari Al-Qur'an, Sunnah shahih, serta hikmah Islam klasik. Inti buku ini adalah Protokol 5-Minute P.A.U.S.E., rem darurat praktis yang bisa digunakan di rumah, kantor, ruang kelas, maupun saat ujian untuk menenangkan badai sebelum melukai orang yang Anda cintai. Dilengkapi panduan praktis 1-10 Stress Thermometer, protokol darurat 5 menit, integrasi sains & Sunnah (sakinah, Du'a al-Karb, mindful dzikir), panduan untuk berbagai peran, serta lembar kerja Printable Pocket Cards dan 14-Day PAUSE Journal.",
+    "tags": [
+      "Pengembangan Diri",
+      "Stress Relief",
+      "Kesehatan Mental",
+      "Psikologi",
+      "Sakinah",
+      "Islam & Psikologi",
+      "Buku Isparmo"
+    ],
+    "audience": [
+      "Keluarga & Individu Muslim",
+      "Orang Tua & Pasangan",
+      "Pekerja Profesional & Karyawan",
+      "Guru & Tenaga Pendidik",
+      "Pembaca Umum"
+    ]
+  },
+  {
     "id": "the-power-of-chatgpt",
     "googlePlayId": "2gAwEgAAQBAJ",
     "googlePlayUrl": "https://play.google.com/store/books/details?id=2gAwEgAAQBAJ",

@@ -426,6 +426,11 @@
         hasDirectMatch = true;
       }
 
+      if ((q === "stress" || q === "stres" || q === "first aid") && book.id === "first-aid-when-stress-strikes") {
+        score += 800;
+        hasDirectMatch = true;
+      }
+
       if (q === "bencana" && book.id.includes("kesiapsiagaan-keluarga")) {
         score += 800;
         hasDirectMatch = true;
